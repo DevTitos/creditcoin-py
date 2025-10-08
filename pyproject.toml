@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "creditcoin-py"
+dynamic = ["version"]
+description = "Python SDK for interacting with Creditcoin blockchain"
+readme = "README.md"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+keywords = ["creditcoin", "blockchain", "sdk", "substrate"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "substrate-interface>=1.7.0",
+    "websockets>=10.0",
+    "scalecodec>=1.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov",
+    "black",
+    "isort",
+    "flake8",
+    "mypy",
+]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/your-username/credit-scan-sdk"
+"Bug Reports" = "https://github.com/your-username/credit-scan-sdk/issues"
+"Source" = "https://github.com/your-username/credit-scan-sdk"
+
+[tool.setuptools_scm]
+write_to = "src/credit_scan_sdk/_version.py"
