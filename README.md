@@ -13,5 +13,56 @@ A Python SDK for interacting with the Creditcoin blockchain using substrateinter
 
 ## Installation
 
-```bash
 pip install credit-scan-sdk
+
+## Account Management
+
+### Creating Accounts
+
+```python
+from credit_scan_sdk import CreditScanClient
+
+client = CreditScanClient()
+
+# Create a new account
+new_account = client.create_account(words_count=12)
+print(f"New address: {new_account.address}")
+print(f"Mnemonic: {new_account.mnemonic}")  # Store securely!
+
+# Import existing account from mnemonic
+imported_account = client.import_account_from_mnemonic("your mnemonic phrase here")
+
+# Import from private key
+imported_account = client.import_account_from_private_key("0x...")
+
+# Get detailed balance
+balance = client.get_balance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
+print(f"Available: {balance.balance} CTC")
+print(f"Locked: {balance.locked} CTC")
+print(f"Reserved: {balance.reserved} CTC")
+
+# Get balances for multiple addresses
+addresses = ["addr1", "addr2", "addr3"]
+balances = client.get_balances_bulk(addresses)
+for addr, bal in balances.items():
+    print(f"{addr}: {bal.balance} CTC")
+
+# Transfer tokens
+receipt = client.transfer(
+    keypair=my_keypair,
+    to_address="recipient_address",
+    amount=10.5,  # CTC
+    wait_for_inclusion=True
+)
+print(f"Transaction hash: {receipt.tx_hash}")
+print(f"Fee: {receipt.fee} CTC")
+
+
+# Estimate transfer fee
+fee = client.get_transfer_fee_estimate(
+    from_address="sender_address",
+    to_address="recipient_address", 
+    amount=10.0
+)
+print(f"Estimated fee: {fee:.6f} CTC")
+```

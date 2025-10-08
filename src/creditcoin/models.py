@@ -1,7 +1,63 @@
 from dataclasses import dataclass
 from typing import Optional, List, Dict, Any
 from datetime import datetime
+import secrets
 
+@dataclass
+class Keypair:
+    """Keypair for account management"""
+    mnemonic: str
+    private_key: bytes
+    public_key: bytes
+    address: str
+    ss58_format: int = 42  # Creditcoin format
+
+    def __str__(self) -> str:
+        return f"Keypair(address={self.address})"
+
+@dataclass
+class TransactionReceipt:
+    """Transaction receipt information"""
+    tx_hash: str
+    block_hash: str
+    block_number: int
+    status: str
+    events: List[Dict[str, Any]]
+    fee: float
+    timestamp: datetime
+
+    @classmethod
+    def from_json(cls, data: Dict[str, Any]) -> 'TransactionReceipt':
+        return cls(
+            tx_hash=data['tx_hash'],
+            block_hash=data['block_hash'],
+            block_number=data['block_number'],
+            status=data['status'],
+            events=data.get('events', []),
+            fee=data.get('fee', 0),
+            timestamp=datetime.fromisoformat(data['timestamp'].replace('Z', '+00:00'))
+        )
+
+@dataclass 
+class TokenBalance:
+    """Token balance information"""
+    symbol: str
+    balance: float
+    locked: float
+    reserved: float
+    total: float
+    decimals: int
+
+    @classmethod
+    def from_json(cls, data: Dict[str, Any]) -> 'TokenBalance':
+        return cls(
+            symbol=data['symbol'],
+            balance=data['balance'],
+            locked=data.get('locked', 0),
+            reserved=data.get('reserved', 0),
+            total=data.get('total', 0),
+            decimals=data.get('decimals', 18)
+        )
 @dataclass
 class AddressInfo:
     """Information about a Creditcoin address"""
