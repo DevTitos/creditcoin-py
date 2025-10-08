@@ -16,14 +16,14 @@ A Python SDK for interacting with the Creditcoin blockchain using substrateinter
 
 ## Installation
 
-pip install credit-scan-sdk
+pip install creditcoin-py
 
 ## Account Management
 
 ### Creating Accounts
 
 ```python
-from credit_scan_sdk import CreditScanClient
+from creditcoin import CreditScanClient
 
 client = CreditScanClient()
 

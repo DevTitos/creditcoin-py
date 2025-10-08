@@ -4,7 +4,7 @@ from typing import Optional, List, Dict, Any, Union
 from substrateinterface import SubstrateInterface, Keypair
 from substrateinterface.exceptions import SubstrateRequestException
 from scalecodec.base import ScaleBytes
-from .credit_contracts import CreditContractManager
+from .credit_contracts import CreditContractManager, LoanTerms
 from .models import (
     AddressInfo,
     Transaction,
