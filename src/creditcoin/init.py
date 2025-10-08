@@ -22,6 +22,18 @@ from .exceptions import (
     InvalidAddressError,
     TransactionError
 )
+from .credit_contracts import CreditContractManager
+from .contract_models import (
+    LoanTerms,
+    CreditAskOrder,
+    CreditBidOrder,
+    CreditDeal,
+    OrderType,
+    OrderStatus,
+    DealStatus,
+    RepaymentSchedule,
+    CollateralInfo
+)
 
 __all__ = [
     "CreditScanClient",
@@ -36,4 +48,16 @@ __all__ = [
     "NetworkError",
     "InvalidAddressError",
     "TransactionError",
+    "CreditContractManager",
+    "LoanTerms",
+    "CreditAskOrder", 
+    "CreditBidOrder",
+    "CreditDeal",
+    "OrderType",
+    "OrderStatus",
+    "DealStatus",
+    "RepaymentSchedule",
+    "CollateralInfo",
 ]
+
+

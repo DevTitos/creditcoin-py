@@ -4,7 +4,7 @@ from typing import Optional, List, Dict, Any, Union
 from substrateinterface import SubstrateInterface, Keypair
 from substrateinterface.exceptions import SubstrateRequestException
 from scalecodec.base import ScaleBytes
-
+from .credit_contracts import CreditContractManager
 from .models import (
     AddressInfo,
     Transaction,
@@ -169,6 +169,7 @@ class CreditScanClient:
         self._substrate = None
         self.account_manager = AccountManager()
         self._connect()
+        self.credit_contracts = CreditContractManager(self)
     
     def _connect(self):
         """Establish connection to Creditcoin node"""
@@ -490,6 +491,61 @@ class CreditScanClient:
             }
         except Exception as e:
             raise TransactionError(f"Failed to get transaction status: {e}")
+        
+    # Add these convenience methods
+    def create_lend_offer(
+        self,
+        keypair: SDKKeypair,
+        principal: float,
+        interest_rate: float,
+        duration_days: int,
+        collateral_required: bool = False,
+        collateral_amount: Optional[float] = None,
+        expiry_blocks: int = 14400
+    ) -> TransactionReceipt:
+        """
+        Convenience method to create a lend offer (ask order)
+        """
+        terms = LoanTerms(
+            principal=principal,
+            interest_rate=interest_rate,
+            duration_days=duration_days,
+            collateral_required=collateral_required,
+            collateral_amount=collateral_amount
+        )
+        
+        return self.credit_contracts.create_ask_order(
+            keypair=keypair,
+            terms=terms,
+            expiry_blocks=expiry_blocks
+        )
+    
+    def create_borrow_request(
+        self,
+        keypair: SDKKeypair,
+        principal: float,
+        interest_rate: float,
+        duration_days: int,
+        collateral_required: bool = False,
+        collateral_amount: Optional[float] = None,
+        expiry_blocks: int = 14400
+    ) -> TransactionReceipt:
+        """
+        Convenience method to create a borrow request (bid order)
+        """
+        terms = LoanTerms(
+            principal=principal,
+            interest_rate=interest_rate,
+            duration_days=duration_days,
+            collateral_required=collateral_required,
+            collateral_amount=collateral_amount
+        )
+        
+        return self.credit_contracts.create_bid_order(
+            keypair=keypair,
+            terms=terms,
+            expiry_blocks=expiry_blocks
+        )
 
     # Existing methods remain the same...
     def get_network_stats(self) -> NetworkStats:

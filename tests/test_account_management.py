@@ -1,8 +1,8 @@
 import pytest
 from unittest.mock import Mock, patch
-from credit_scan_sdk import CreditScanClient, AccountManager
-from credit_scan_sdk.models import Keypair
-from credit_scan_sdk.exceptions import KeypairError, InvalidAddressError, InsufficientBalanceError
+from creditcoin import CreditScanClient, AccountManager
+from creditcoin.models import Keypair
+from creditcoin.exceptions import KeypairError, InvalidAddressError, InsufficientBalanceError
 
 class TestAccountManagement:
     

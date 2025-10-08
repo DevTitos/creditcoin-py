@@ -4,12 +4,15 @@ A Python SDK for interacting with the Creditcoin blockchain using substrateinter
 
 ## Features
 
-- Get address information and balances
-- Query block information
-- Retrieve network statistics
-- Access Creditcoin order book (Ask/Bid/Deal orders)
-- Transaction scanning capabilities
-- Type-safe data models
+- 🔐 **Account Management**: Create, import, and manage Creditcoin accounts
+- 💰 **Balance Querying**: Get detailed token balances and transaction history
+- 📊 **Network Statistics**: Access real-time blockchain statistics
+- 🤝 **Credit Marketplace**: Create and manage lend/borrow orders
+- 📜 **Transaction Management**: Send transactions with fee estimation
+- 🔍 **Block Explorer**: Query blocks, transactions, and addresses
+- 🛡️ **Security**: Built-in validation and error handling
+- 🚀 **Async Support**: Full asynchronous operation support
+
 
 ## Installation
 
